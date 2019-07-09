@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    App<el-button type="danger" icon="el-icon-delete" circle></el-button>
+    <!-- 一级路由对应组件渲染的位置 -->
+    <router-view></router-view>
   </div>
 </template>
 
