@@ -28,7 +28,7 @@ export default {
     //   校验手机号
     const checkMobile = (rule, value, callback) => {
       // 校验逻辑，把value拿出来进行手机号的格式校验
-      if (/^1[1-3]\d{9}$/.test(value)) {
+      if (/^1[3-9]\d{9}$/.test(value)) {
         callback()
       } else {
         callback(new Error('手机号格式错误！'))
