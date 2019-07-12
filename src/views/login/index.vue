@@ -37,8 +37,8 @@ export default {
     return {
       // 表单数据对象
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '15830988917',
+        code: '246810'
       },
       //   表单验证规则对象
       loginRules: {
@@ -66,6 +66,13 @@ export default {
             //   console.log(res.data)
             // 1跳转到首页
             // 2、保存用户的信息，用来判断登录的状态（待完成）
+            // sessionStorage BOM对象，全局对象 作用是保存数据
+            // 是有有效期，当你关闭浏览器后就失效
+            // sessionStorage.setItem(key,value) 存储数据 value字符串
+            // sessionStorage.getItem(key) 获取数据
+            // sessionStorage.removeItem(key) 获取数据
+            // sessionStorage.clear()清空所有的数据
+              window.sessionStorage.setItem('hm74-toutiao', JSON.stringify(res.data.data))
               this.$router.push('/')
             })
             .catch(() => {
