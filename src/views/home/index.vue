@@ -5,7 +5,7 @@
         <el-menu
         router
          style="border-right:none"
-        default-active="1"
+        :default-active="$route.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -46,21 +46,23 @@
       <el-header class="my-header">
         <span class="el-icon-s-fold" @click="toggleMenu()"></span>
         <span class="text">江苏传智博客科技教育有限公司</span>
-        <el-dropdown style="float:right;">
+        <el-dropdown style="float:right;" @command = "handleCommand">
           <span class="el-dropdown-link">
             <img
               style="vertical-align: middle;"
               width="30"
               height="30"
-              src="../../assets/images/avatar.jpg"
+              :src="avatar"
               alt
             />
-            <b style="vertical-align: middle;padding-left:5px;">黑马小哥</b>
+            <b style="vertical-align: middle;padding-left:5px;">{{ name }}</b>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+          <!--   <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" @click.native="logout()">退出登录</el-dropdown-item> -->
+            <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -75,12 +77,35 @@
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      avatar: '',
+      name: ''
     }
+  },
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('hm74-toutiao'))
+    this.avatar = user.photo
+    this.name = user.name
   },
   methods: {
     toggleMenu () {
       this.isCollapse = !this.isCollapse
+    },
+    // 使用的是click事件，dom的原生事件
+    // 此时你绑定了一个原生事件，给一个自定义组件 el-dropdown-item
+    // 组件解析过后这个标签是不存在的  事件绑定无效
+    // 事件修饰符，@click.prevent阻止浏览器默认行为 @click.native绑定原生的事件
+    setting () {
+      this.$router.push('/setting')
+    },
+    logout () {
+      // 清除sessionStorage中的hm74-toutiao
+      window.sessionStorage.removeItem('hm74-toutiao')
+      this.$router.push('/login')
+    },
+    handleCommand (command) {
+      // command就是点击的选项中的command的值 setting/login
+      this[command]() // command === setting ===> setting/logout
     }
   }
 }

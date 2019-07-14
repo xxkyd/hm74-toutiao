@@ -56,7 +56,7 @@ export default {
   methods: {
     login () {
       //   对整个表单进行校验
-      this.$refs.loginForm.validate(valid => {
+      /* this.$refs.loginForm.validate(valid => {
         if (valid) {
           // 提交登录请求
           this.$http
@@ -79,6 +79,19 @@ export default {
               // 提示用户错误
               this.$message.error('手机号或验证码不正确')
             })
+        }
+      }) */
+      this.$refs.loginForm.validate(async valid => {
+        if (valid) {
+          // 发请求 promise对象 给你发请求
+          // try{业务逻辑}catch(err){处理错误}
+          try {
+            const res = await this.$http.post('authorizations', this.loginForm)
+            window.sessionStorage.setItem('hm74-toutiao', JSON.stringify(res.data.data))
+            this.$router.push('/')
+          } catch (err) {
+            this.$message.error('手机号或验证码不正确')
+          }
         }
       })
     }
