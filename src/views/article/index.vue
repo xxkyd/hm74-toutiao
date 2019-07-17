@@ -12,7 +12,7 @@
             <el-radio :label="null">全部状态</el-radio>
             <el-radio :label="0">草稿</el-radio>
             <el-radio :label="1">待审核</el-radio>
-            <el-radio :label="2">审核通过</el-radio>
+             <el-radio :label="2">审核通过</el-radio>
             <el-radio :label="3">审核失败</el-radio>
           </el-radio-group>
         </el-form-item>

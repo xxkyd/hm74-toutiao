@@ -13,6 +13,9 @@ import router from '@/router'
 import components from '@/components'
 // 导入axios
 import axios from '@/api/axios'
+// 导入axios
+// 导入全局样式
+import '@/styles/index.less'
 // 基准路径
 /* axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 // token认证
