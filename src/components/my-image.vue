@@ -143,7 +143,7 @@ export default {
 
 <style scoped lang="less">
 .image-container{
-    display: inline-block44\\;
+    display: inline-block;
     margin-right: 20px;
 }
 .img-item {
